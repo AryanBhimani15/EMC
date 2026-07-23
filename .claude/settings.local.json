@@ -1,0 +1,31 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pkill -f \"http.server 8899\")",
+      "Bash(python3 *)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" http://localhost:8899/)",
+      "Bash(grep -oiE \"#\\(ff3c00|ff4d|f9|fb923c|ea580c|f97316|ff5|e64|d64\\)[0-9a-f]{0,3}\" index-D8kQn2vF.js)",
+      "Bash(curl -s http://localhost:8899/assets/site.css)",
+      "Bash(grep -oE '\"[A-Z][^\"]{18,90}\\\\.\"' index-D8kQn2vF.js)",
+      "Bash(rm -rf ogsite)",
+      "Bash(mkdir -p ogsite)",
+      "Bash(unzip -oq \"/Users/aryan/Downloads/EMC-site-emailjs.zip\" -d ogsite)",
+      "Bash(grep -oE \"radial-gradient\\\\\\([^;{}]{10,160}\\\\\\)\" index-5XO12u1U.css)",
+      "Bash(grep -oE \"\\(background\\(-image|-color\\)?\\):[^;{}]{6,160}\" index-5XO12u1U.css)",
+      "Bash(grep -oE \"radial-gradient\\\\\\([^\\\\\"'\\\\\\)]{5,180}\\\\\\)\" index-D8kQn2vF.js)",
+      "Bash(grep -oE \"background\\(Image|Color|\\)?:\\\\\"?[^\\\\\"',}]{6,180}\" index-D8kQn2vF.js)",
+      "Bash(grep -oE \"radial[^;{}]{5,180}\" index-5XO12u1U.css)",
+      "Bash(curl -sL \"https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=2000&q=80\" -o assets/hero-clouds.jpg)",
+      "Bash(command -v sips)",
+      "Bash(echo \"sips: $\\(command -v sips\\)\")",
+      "Bash(command -v magick convert)",
+      "Bash(echo \"magick: $\\(command -v magick convert 2>&1\\)\")",
+      "Bash(command -v avifenc)",
+      "Bash(magick -list format)",
+      "Bash(sips --formats)",
+      "Bash(sips -s format avif)",
+      "Bash(node *)",
+      "Bash(awk '{print $5, $9}')"
+    ]
+  }
+}

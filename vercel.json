@@ -1,0 +1,7 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/module.html", "destination": "/modules/commercial", "permanent": false }
+  ]
+}
