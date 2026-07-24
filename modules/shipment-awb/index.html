@@ -4,22 +4,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="color-scheme" content="dark light" />
-  <title>Shipment &amp; Air Waybill Management — EMC Airline Cargo Suite</title>
-  <meta name="description" content="Provides complete control over the shipment documentation lifecycle while establishing a single source of truth for every cargo movement across the…" />
+  <title>e-AWB &amp; Air Waybill Management Software | EMC Ease My Cargo</title>
+  <meta name="description" content="Control the air waybill lifecycle end to end: AWB stock and issuance, e-AWB, consolidations, split shipments, milestone tracking and documentation audit checks." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://easemycargo.com/modules/shipment-awb" />
-  <meta property="og:title" content="Shipment &amp; Air Waybill Management — EMC Airline Cargo Suite" />
-  <meta property="og:description" content="Provides complete control over the shipment documentation lifecycle while establishing a single source of truth for every cargo movement across the…" />
+  <meta property="og:title" content="e-AWB &amp; Air Waybill Management Software | EMC Ease My Cargo" />
+  <meta property="og:description" content="Control the air waybill lifecycle end to end: AWB stock and issuance, e-AWB, consolidations, split shipments, milestone tracking and documentation audit checks." />
   <meta property="og:url" content="https://easemycargo.com/modules/shipment-awb" />
   <meta property="og:image" content="https://easemycargo.com/assets/og.jpg" />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content="https://easemycargo.com/assets/og.jpg" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/site.css?v=10">
+  <link rel="preload" href="/assets/fonts/archivo-var-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/plexsans-var-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/site.css?v=11">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://easemycargo.com/"},{"@type":"ListItem","position":2,"name":"Execution Visibility & Network Operations","item":"https://easemycargo.com/pillars/operational"},{"@type":"ListItem","position":3,"name":"Shipment & Air Waybill Management"}]}</script>
 </head>
 <body>
 
@@ -38,19 +38,19 @@
         <div class="dropdown mega" id="dd-products">
           <div class="mega-grid">
             <div class="mega-col">
-              <h6>Commercial Pillar</h6>
+              <a class="mega-head" href="/pillars/commercial">Commercial Pillar</a>
               <a class="mega-link" href="/modules/commercial">Commercial Management</a>
               <a class="mega-link" href="/modules/capacity-network">Capacity &amp; Network</a>
               <a class="mega-link" href="/modules/booking">Booking Management</a>
             </div>
             <div class="mega-col">
-              <h6>Operational Pillar</h6>
+              <a class="mega-head" href="/pillars/operational">Operational Pillar</a>
               <a class="mega-link" href="/modules/shipment-awb">Shipment &amp; AWB</a>
               <a class="mega-link" href="/modules/terminal-operations">Terminal &amp; Cargo Ops</a>
               <a class="mega-link" href="/modules/uld">ULD Management</a>
             </div>
             <div class="mega-col">
-              <h6>Financial Pillar</h6>
+              <a class="mega-head" href="/pillars/financial">Financial Pillar</a>
               <a class="mega-link" href="/modules/revenue-accounting">Revenue Accounting</a>
               <a class="mega-link" href="/modules/compliance-security">Compliance &amp; Security</a>
               <a class="mega-link" href="/modules/stakeholder-collaboration">Stakeholder Collaboration</a>
@@ -74,7 +74,7 @@
           </a>
           <a class="dd-link" href="/#integrations">
             <span class="dd-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2l3 6 6 .9-4.5 4.3 1 6.3L12 17l-5.5 2.5 1-6.3L3 8.9 9 8z"/></svg></span>
-            <span><span class="dd-title">Connectivity &amp; Standards</span><span class="dd-desc">OneRecord, Cargo XML, Cargo IMP &amp; APIs</span></span>
+            <span><span class="dd-title">Connectivity &amp; Standards</span><span class="dd-desc">ONE Record, Cargo-XML, Cargo-IMP &amp; APIs</span></span>
           </a>
         </div>
       </div>
@@ -98,14 +98,17 @@
 
 <div class="mobile-menu" id="mobileMenu">
   <div class="mm-group">Commercial Pillar</div>
+  <a href="/pillars/commercial">Commercial Pillar overview</a>
   <a href="/modules/commercial">Commercial Management</a>
   <a href="/modules/capacity-network">Capacity &amp; Network Management</a>
   <a href="/modules/booking">Booking Management</a>
   <div class="mm-group">Operational Pillar</div>
+  <a href="/pillars/operational">Operational Pillar overview</a>
   <a href="/modules/shipment-awb">Shipment &amp; Air Waybill Management</a>
   <a href="/modules/terminal-operations">Terminal &amp; Cargo Operations</a>
   <a href="/modules/uld">ULD Management</a>
   <div class="mm-group">Financial &amp; Governance Pillar</div>
+  <a href="/pillars/financial">Financial Pillar overview</a>
   <a href="/modules/revenue-accounting">Revenue Accounting</a>
   <a href="/modules/compliance-security">Compliance &amp; Security</a>
   <a href="/modules/stakeholder-collaboration">Stakeholder Collaboration</a>
@@ -286,7 +289,7 @@
   </div>
 </footer>
 
-<script src="/assets/site.js?v=10"></script>
-<script defer src="/assets/demo-modal.js?v=10"></script>
+<script src="/assets/site.js?v=11"></script>
+<script defer src="/assets/demo-modal.js?v=11"></script>
 </body>
 </html>

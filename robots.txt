@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /module.html
 
 Sitemap: https://easemycargo.com/sitemap.xml

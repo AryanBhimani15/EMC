@@ -6,7 +6,6 @@ HTML/CSS/JS that works on any static host (Vercel, GitHub Pages, GoDaddy).
 
 ```
 ├── index.html              lean homepage (the 20% — orient & excite)
-├── module.html             legacy redirect shim (?m=<id> → clean path, noindex)
 ├── favicon.svg
 ├── scripts/
 │   └── build-pages.mjs     static page generator (reads assets/modules.js)
@@ -21,11 +20,23 @@ HTML/CSS/JS that works on any static host (Vercel, GitHub Pages, GoDaddy).
 │   ├── site.js             nav, mobile menu, dropdown a11y, theme, scroll reveal
 │   ├── modules.js          module content data (the 80%) — single source of truth
 │   ├── demo-modal.js       [data-demo] panel → sends via EmailJS
+│   ├── fonts/              self-hosted woff2 subsets: Archivo · IBM Plex Sans · IBM Plex Mono
 │   ├── og.jpg              1200×630 social share image
-│   └── hero-*.jpg/.avif    responsive hero srcset variants
-├── vercel.json             cleanUrls + /module.html redirect (unknown paths 404)
-└── _legacy-react-bundle/   previous compiled React build (kept for reference)
+│   └── hero-*.jpg/.avif    responsive hero srcset (ULD/pallet-loader ramp photo)
+└── vercel.json             cleanUrls + 20 permanent /module.html?m=… redirects
 ```
+
+## Visual identity
+
+Gunmetal / hangar-shadow surfaces with a single international-orange (ramp-safety)
+accent — every colour is a named token in `assets/site.css` with both theme values
+declared at token time. Type is three self-hosted faces: **Archivo** (display),
+**IBM Plex Sans** (body), **IBM Plex Mono** (identifiers — module/stage numbers,
+station-code-style labels, spec-plate fields). No runtime Google Fonts request.
+
+Hero photograph: ["Aircraft container and pallet loader"](https://commons.wikimedia.org/wiki/File:Aircraft_container_and_pallet_loader.JPG)
+by Jamesshliu, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
+(attributed in the homepage footer).
 
 ## Static page generation
 
@@ -34,6 +45,16 @@ Module, pillar, platform, company, legal and 404 pages are **generated** from th
 the generated `index.html` files under `modules/`, `pillars/`, etc.; they are
 overwritten. Edit content in `assets/modules.js` (or the data tables in
 `scripts/build-pages.mjs` for pillar/company/legal copy), then rebuild:
+
+**Meta descriptions** are authored, not derived. Set `metaDescription` on a
+module (in `assets/modules.js`) or a pillar (in `PILLARS`, `scripts/build-pages.mjs`)
+and it becomes both `<meta name="description">` and `og:description`. When absent
+the generator falls back to `clip(lead, 155)` / `clip(statement, 155)`, which
+truncates mid-sentence with an ellipsis — so authored text is strongly preferred.
+Target 150–160 characters.
+
+**Terminology:** IATA styles these `ONE Record`, `Cargo-IMP` and `Cargo-XML`.
+Keep that styling everywhere, including hand-authored `index.html`.
 
 ```
 node scripts/build-pages.mjs
@@ -49,11 +70,15 @@ The **homepage** carries ~20% of the information — just enough to orient and
 excite. Each module is a compact card (name · one-line value prop · three
 capability bullets · **Learn more →**). No full feature lists on the homepage.
 
-The **module pages** carry the other 80%. Every card links to
-`/module.html?m=<id>`, which `modules.js` renders from a single content object
+The **module pages** carry the other 80%. Every card links to its clean path
+(`/modules/<slug>`), a static page generated from the `M` object at build time
 (hero, full capability grid, an in-practice visual, CTA) using the same
 `site.css`. To edit or add a module's deep content, edit the `M` object at the
-top of `assets/modules.js` — no new HTML file needed.
+top of `assets/modules.js` and rebuild.
+
+Legacy `/module.html?m=<id>` URLs are handled entirely by `vercel.json` — 20
+permanent (301) redirects, one per known `m` value, with a catch-all to `/` for
+anything unrecognised. The old `module.html` shim no longer exists in the repo.
 
 Homepage sections: Hero · Trusted By · Platform Overview · Cargo Journey ·
 Commercial · Operations · Financial · Digital Platform · Integrations · CTA.
@@ -73,7 +98,7 @@ Positioned as **EMC Aviation Commerce Platform → Products → Airline Cargo Su
 6. **Deep dives** — Inquiry Management, Rate & Tariff, Booking, Air Waybill,
    Shipment Acceptance & Manifest, Tracking, Broadcasting.
 7. **Platform** — the low-code / configurable story (dynamic forms, workflows,
-   rules, API gateway, OneRecord, Cargo XML/IMP, AI services, analytics).
+   rules, API gateway, ONE Record, Cargo-XML / Cargo-IMP, AI services, analytics).
 8. **Standards & connectivity**, **stakeholders**, **product family**, CTA, footer.
 
 No fabricated metrics, customer names or testimonials — mock UI cards show

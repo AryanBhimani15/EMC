@@ -16,6 +16,9 @@ import { fileURLToPath } from "node:url";
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const DOMAIN = "https://easemycargo.com";
 const CONTACT = "emcnoreplynotifications@gmail.com";
+/* Stable node id for the Organization, so every page references one entity
+   rather than restating it inline. Defined on /company, referenced elsewhere. */
+const ORG_ID = `${DOMAIN}/company#organization`;
 
 /* ---- Load M + ALIASES from assets/modules.js without a browser ---- */
 const modulesSrc = readFileSync(join(ROOT, "assets/modules.js"), "utf8");
@@ -37,6 +40,16 @@ const SLUG = {
 };
 const modPath = (key) => (key === "platform" ? "/platform" : `/modules/${SLUG[key]}`);
 
+/* ---- <title> ---------------------------------------------------------
+   Keyword-first, brand last. `metaTitle` is the search-facing phrase; the
+   visible `title` on the page stays the product name. Falls back to the old
+   "<name> — EMC Airline Cargo Suite" shape when metaTitle is absent.
+   Length is a proxy — Google truncates on pixel width (~600px), so a 62-char
+   title is fine when the extra word earns its place.                      */
+const BRAND_SUFFIX = " | EMC Ease My Cargo";
+const seoTitle = (o) =>
+  o.metaTitle ? o.metaTitle + BRAND_SUFFIX : `${o.title} — EMC Airline Cargo Suite`;
+
 /* ---- Pillar definitions ---- */
 const PILLARS = {
   commercial: {
@@ -44,6 +57,8 @@ const PILLARS = {
     eyebrow: "Commercial Pillar",
     title: "Commercial Management & Revenue Control",
     statement: "Capabilities that help airlines manage customer demand, price intelligently, allocate capacity strategically and streamline booking responsiveness.",
+    metaTitle: "Air Cargo Commercial Management",
+    metaDescription: "Customer and demand management, intelligent pricing and revenue control, capacity allocation and booking responsiveness for airline cargo commercial teams.",
     modules: ["commercial", "capacity", "booking"],
     themes: [
       { name: "Customer & Demand Management", desc: "A unified commercial foundation for customers, products, inquiries and contracts across every sales channel." },
@@ -56,6 +71,8 @@ const PILLARS = {
     eyebrow: "Operational Pillar",
     title: "Execution Visibility & Network Operations",
     statement: "Capabilities that establish execution visibility across shipment control, terminal processes and ULD lifecycle management.",
+    metaTitle: "Air Cargo Operations Management",
+    metaDescription: "End-to-end shipment documentation control, terminal and cargo execution, and ULD lifecycle visibility across every station in the airline cargo network.",
     modules: ["awb", "terminal", "uld"],
     themes: [
       { name: "Shipment Documentation Control", desc: "A single source of truth for the air waybill lifecycle, from stock and issuance through tracking and milestones." },
@@ -68,6 +85,8 @@ const PILLARS = {
     eyebrow: "Financial & Governance Pillar",
     title: "Revenue Integrity & Ecosystem Compliance",
     statement: "Capabilities that reinforce revenue integrity, compliance assurance and partner collaboration across the cargo ecosystem.",
+    metaTitle: "Cargo Revenue & Compliance Management",
+    metaDescription: "Revenue integrity and assurance, regulatory and security compliance, and ecosystem partner collaboration across the airline cargo financial lifecycle.",
     modules: ["revenue", "compliance", "collaboration"],
     themes: [
       { name: "Revenue Integrity & Assurance", desc: "Automated billing, interline settlement, proration and revenue-leakage detection with audit controls." },
@@ -84,7 +103,7 @@ const PLATFORM_LAYERS = [
   { name: "Enterprise Platform", blurb: "Governance and administrative structure.",
     items: ["Organization Management", "Stakeholder Management", "Identity & Access Management"] },
   { name: "Connectivity Platform", blurb: "Seamless data exchange and messaging.",
-    items: ["API Gateway", "Cargo IMP", "Cargo XML", "OneRecord"] },
+    items: ["API Gateway", "Cargo-IMP", "Cargo-XML", "ONE Record"] },
   { name: "Intelligence Platform", blurb: "Data-driven decision support across channels.",
     items: ["Analytics", "Reporting", "AI Services"] },
 ];
@@ -94,6 +113,30 @@ const PLATFORM_LAYERS = [
    ============================================================ */
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 const attr = (s) => esc(s).replace(/"/g, "&quot;");
+
+/* ---- BreadcrumbList -------------------------------------------------
+   Pass [name, path] pairs, root first. Every path must resolve to a real
+   page — there is no /modules or /pillars index, so those never appear as
+   crumbs. The trailing crumb (the current page) carries no item URL, per
+   Google's guidance.                                                     */
+function breadcrumb(trail) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: trail.map(([name, path], i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name,
+      ...(i < trail.length - 1 ? { item: DOMAIN + path } : {}),
+    })),
+  };
+}
+
+/* Module key -> the pillar that owns it, for breadcrumb trails. */
+const PILLAR_OF = {};
+for (const p of Object.values(PILLARS)) {
+  for (const key of p.modules) PILLAR_OF[key] = p;
+}
 
 function clip(str, n = 155) {
   const s = String(str).replace(/\s+/g, " ").trim();
@@ -123,7 +166,7 @@ const svg = (paths) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColo
 /* ============================================================
    Shared shell: <head>, nav, footer, scripts
    ============================================================ */
-function head({ title, description, path, jsonld, ogType = "website" }) {
+function head({ title, description, path, jsonld, ogType = "website", robots = "index, follow", canonical = true }) {
   const url = DOMAIN + path;
   const parts = [
     '<meta charset="UTF-8" />',
@@ -131,8 +174,10 @@ function head({ title, description, path, jsonld, ogType = "website" }) {
     '<meta name="color-scheme" content="dark light" />',
     `<title>${esc(title)}</title>`,
     `<meta name="description" content="${attr(description)}" />`,
-    '<meta name="robots" content="index, follow" />',
-    `<link rel="canonical" href="${attr(url)}" />`,
+    `<meta name="robots" content="${attr(robots)}" />`,
+  ];
+  if (canonical) parts.push(`<link rel="canonical" href="${attr(url)}" />`);
+  parts.push(
     `<meta property="og:title" content="${attr(title)}" />`,
     `<meta property="og:description" content="${attr(description)}" />`,
     `<meta property="og:url" content="${attr(url)}" />`,
@@ -141,12 +186,13 @@ function head({ title, description, path, jsonld, ogType = "website" }) {
     '<meta name="twitter:card" content="summary_large_image" />',
     `<meta name="twitter:image" content="${DOMAIN}/assets/og.jpg" />`,
     '<link rel="icon" type="image/svg+xml" href="/favicon.svg" />',
-    '<link rel="preconnect" href="https://fonts.googleapis.com">',
-    '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>',
-    '<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">',
-    '<link rel="stylesheet" href="/assets/site.css?v=10">',
-  ];
-  if (jsonld) parts.push(`<script type="application/ld+json">${JSON.stringify(jsonld)}</script>`);
+    '<link rel="preload" href="/assets/fonts/archivo-var-latin.woff2" as="font" type="font/woff2" crossorigin>',
+    '<link rel="preload" href="/assets/fonts/plexsans-var-latin.woff2" as="font" type="font/woff2" crossorigin>',
+    '<link rel="stylesheet" href="/assets/site.css?v=11">',
+  );
+  for (const block of [jsonld].flat().filter(Boolean)) {
+    parts.push(`<script type="application/ld+json">${JSON.stringify(block)}</script>`);
+  }
   return parts.join("\n  ");
 }
 
@@ -165,19 +211,19 @@ const NAV = `<header class="nav" id="nav">
         <div class="dropdown mega" id="dd-products">
           <div class="mega-grid">
             <div class="mega-col">
-              <h6>Commercial Pillar</h6>
+              <a class="mega-head" href="/pillars/commercial">Commercial Pillar</a>
               <a class="mega-link" href="/modules/commercial">Commercial Management</a>
               <a class="mega-link" href="/modules/capacity-network">Capacity &amp; Network</a>
               <a class="mega-link" href="/modules/booking">Booking Management</a>
             </div>
             <div class="mega-col">
-              <h6>Operational Pillar</h6>
+              <a class="mega-head" href="/pillars/operational">Operational Pillar</a>
               <a class="mega-link" href="/modules/shipment-awb">Shipment &amp; AWB</a>
               <a class="mega-link" href="/modules/terminal-operations">Terminal &amp; Cargo Ops</a>
               <a class="mega-link" href="/modules/uld">ULD Management</a>
             </div>
             <div class="mega-col">
-              <h6>Financial Pillar</h6>
+              <a class="mega-head" href="/pillars/financial">Financial Pillar</a>
               <a class="mega-link" href="/modules/revenue-accounting">Revenue Accounting</a>
               <a class="mega-link" href="/modules/compliance-security">Compliance &amp; Security</a>
               <a class="mega-link" href="/modules/stakeholder-collaboration">Stakeholder Collaboration</a>
@@ -201,7 +247,7 @@ const NAV = `<header class="nav" id="nav">
           </a>
           <a class="dd-link" href="/#integrations">
             <span class="dd-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2l3 6 6 .9-4.5 4.3 1 6.3L12 17l-5.5 2.5 1-6.3L3 8.9 9 8z"/></svg></span>
-            <span><span class="dd-title">Connectivity &amp; Standards</span><span class="dd-desc">OneRecord, Cargo XML, Cargo IMP &amp; APIs</span></span>
+            <span><span class="dd-title">Connectivity &amp; Standards</span><span class="dd-desc">ONE Record, Cargo-XML, Cargo-IMP &amp; APIs</span></span>
           </a>
         </div>
       </div>
@@ -225,14 +271,17 @@ const NAV = `<header class="nav" id="nav">
 
 <div class="mobile-menu" id="mobileMenu">
   <div class="mm-group">Commercial Pillar</div>
+  <a href="/pillars/commercial">Commercial Pillar overview</a>
   <a href="/modules/commercial">Commercial Management</a>
   <a href="/modules/capacity-network">Capacity &amp; Network Management</a>
   <a href="/modules/booking">Booking Management</a>
   <div class="mm-group">Operational Pillar</div>
+  <a href="/pillars/operational">Operational Pillar overview</a>
   <a href="/modules/shipment-awb">Shipment &amp; Air Waybill Management</a>
   <a href="/modules/terminal-operations">Terminal &amp; Cargo Operations</a>
   <a href="/modules/uld">ULD Management</a>
   <div class="mm-group">Financial &amp; Governance Pillar</div>
+  <a href="/pillars/financial">Financial Pillar overview</a>
   <a href="/modules/revenue-accounting">Revenue Accounting</a>
   <a href="/modules/compliance-security">Compliance &amp; Security</a>
   <a href="/modules/stakeholder-collaboration">Stakeholder Collaboration</a>
@@ -294,14 +343,14 @@ const FOOTER = `<footer class="footer">
   </div>
 </footer>`;
 
-const SCRIPTS = `<script src="/assets/site.js?v=10"></script>
-<script defer src="/assets/demo-modal.js?v=10"></script>`;
+const SCRIPTS = `<script src="/assets/site.js?v=11"></script>
+<script defer src="/assets/demo-modal.js?v=11"></script>`;
 
-function page({ title, description, path, main, jsonld, ogType }) {
+function page({ title, description, path, main, jsonld, ogType, robots, canonical }) {
   return `<!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
-  ${head({ title, description, path, jsonld, ogType })}
+  ${head({ title, description, path, jsonld, ogType, robots, canonical })}
 </head>
 <body>
 
@@ -666,30 +715,37 @@ for (const key of Object.keys(SLUG)) {
   const m = M[key];
   const path = modPath(key);
   write(`modules/${SLUG[key]}/index.html`, page({
-    title: `${m.title} — EMC Airline Cargo Suite`,
-    description: clip(m.lead, 155),
+    title: seoTitle(m),
+    description: m.metaDescription || clip(m.lead, 155),
     path,
     main: modulePageMain(key),
+    jsonld: breadcrumb([
+      ["Home", "/"],
+      [PILLAR_OF[key].title, `/pillars/${PILLAR_OF[key].slug}`],
+      [m.title, path],
+    ]),
   }));
   pagesForSitemap.push(path);
 }
 
 // Platform
 write("platform/index.html", page({
-  title: "EMC Digital Platform — Airline Cargo Suite",
-  description: clip(M.platform.lead, 155),
+  title: seoTitle(M.platform),
+  description: M.platform.metaDescription || clip(M.platform.lead, 155),
   path: "/platform",
   main: platformPageMain(),
+  jsonld: breadcrumb([["Home", "/"], ["Digital Platform", "/platform"]]),
 }));
 pagesForSitemap.push("/platform");
 
 // Pillars
 for (const p of Object.values(PILLARS)) {
   write(`pillars/${p.slug}/index.html`, page({
-    title: `${p.title} — EMC Airline Cargo Suite`,
-    description: clip(p.statement, 155),
+    title: seoTitle(p),
+    description: p.metaDescription || clip(p.statement, 155),
     path: `/pillars/${p.slug}`,
     main: pillarPageMain(p),
+    jsonld: breadcrumb([["Home", "/"], [p.title, `/pillars/${p.slug}`]]),
   }));
   pagesForSitemap.push(`/pillars/${p.slug}`);
 }
@@ -700,19 +756,28 @@ write("company/index.html", page({
   description: "EMC (Ease My Cargo) builds the EMC Aviation Commerce Platform and its Airline Cargo Suite — a configurable, cloud-native platform for the air cargo industry.",
   path: "/company",
   main: companyPageMain(),
-  jsonld: {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: "EMC | Ease My Cargo",
-    legalName: "EMC | Ease My Cargo",
-    alternateName: "Ease My Cargo",
-    url: DOMAIN,
-    logo: `${DOMAIN}/favicon.svg`,
-    email: CONTACT,
-    description: "Builder of the EMC Aviation Commerce Platform and its Airline Cargo Suite, a configurable cloud-native airline cargo management platform.",
-    address: { "@type": "PostalAddress", addressCountry: "IN" },
-    contactPoint: { "@type": "ContactPoint", email: CONTACT, contactType: "sales" },
-  },
+  jsonld: [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "@id": ORG_ID,
+      name: "EMC | Ease My Cargo",
+      legalName: "EMC | Ease My Cargo",
+      alternateName: "Ease My Cargo",
+      url: DOMAIN,
+      logo: `${DOMAIN}/favicon.svg`,
+      description: "Builder of the EMC Aviation Commerce Platform and its Airline Cargo Suite, a configurable cloud-native airline cargo management platform.",
+      address: { "@type": "PostalAddress", addressCountry: "IN" },
+      // TODO(contact): no @easemycargo.com mailbox exists yet. The `email` and
+      // `contactPoint` properties were removed rather than publish a personal
+      // gmail.com address as the company's structured sales contact. Restore
+      // both once a domain mailbox (e.g. sales@easemycargo.com) is live.
+      // TODO(sameAs): add LinkedIn / Crunchbase / X profile URLs here once real
+      // company profiles exist. Left absent deliberately — inventing them would
+      // point the entity graph at pages that do not resolve.
+    },
+    breadcrumb([["Home", "/"], ["Company", "/company"]]),
+  ],
 }));
 pagesForSitemap.push("/company");
 
@@ -722,6 +787,7 @@ write("legal/privacy/index.html", page({
   description: "How EMC (Ease My Cargo) collects and uses the details you submit when requesting a demo, aligned with India's DPDP Act and GDPR.",
   path: "/legal/privacy",
   main: legalShell("Privacy Policy", "23 July 2026", privacyBody()),
+  jsonld: breadcrumb([["Home", "/"], ["Privacy Policy", "/legal/privacy"]]),
 }));
 pagesForSitemap.push("/legal/privacy");
 
@@ -730,29 +796,41 @@ write("legal/terms/index.html", page({
   description: "The terms that govern your use of the EMC Aviation Commerce Platform marketing website.",
   path: "/legal/terms",
   main: legalShell("Terms of Service", "23 July 2026", termsBody()),
+  jsonld: breadcrumb([["Home", "/"], ["Terms of Service", "/legal/terms"]]),
 }));
 pagesForSitemap.push("/legal/terms");
 
-// 404 (not in sitemap)
+// 404 (not in sitemap) — must not be indexed and carries no canonical
 write("404.html", page({
   title: "Page not found — EMC Airline Cargo Suite",
   description: "The page you’re looking for doesn’t exist or may have moved.",
   path: "/404",
   main: notFoundMain(),
+  robots: "noindex, follow",
+  canonical: false,
 }));
 
 // robots.txt + sitemap.xml
 write("robots.txt", `User-agent: *
 Allow: /
-Disallow: /module.html
 
 Sitemap: ${DOMAIN}/sitemap.xml
 `);
 
 const today = "2026-07-23";
+/* Homepage 1.0 · product pages (modules, pillars, platform) 0.8 ·
+   supporting pages (company) 0.6 · legal boilerplate 0.3. Legal pages sat at
+   0.7 — level with product — which told crawlers the terms page mattered as
+   much as the modules. */
+function sitemapPriority(p) {
+  if (p === "/") return "1.0";
+  if (p.startsWith("/legal/")) return "0.3";
+  if (p === "/company") return "0.6";
+  return "0.8";
+}
 const urls = pagesForSitemap.map((p) => {
   const loc = DOMAIN + (p === "/" ? "/" : p);
-  const priority = p === "/" ? "1.0" : "0.7";
+  const priority = sitemapPriority(p);
   return `  <url>\n    <loc>${loc}</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>${priority}</priority>\n  </url>`;
 }).join("\n");
 write("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>

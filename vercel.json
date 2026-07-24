@@ -2,6 +2,25 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
-    { "source": "/module.html", "destination": "/modules/commercial", "permanent": false }
+    { "source": "/module.html", "has": [{ "type": "query", "key": "m", "value": "commercial" }], "destination": "/modules/commercial", "permanent": true },
+    { "source": "/module.html", "has": [{ "type": "query", "key": "m", "value": "capacity" }], "destination": "/modules/capacity-network", "permanent": true },
+    { "source": "/module.html", "has": [{ "type": "query", "key": "m", "value": "booking" }], "destination": "/modules/booking", "permanent": true },
+    { "source": "/module.html", "has": [{ "type": "query", "key": "m", "value": "awb" }], "destination": "/modules/shipment-awb", "permanent": true },
+    { "source": "/module.html", "has": [{ "type": "query", "key": "m", "value": "terminal" }], "destination": "/modules/terminal-operations", "permanent": true },
+    { "source": "/module.html", "has": [{ "type": "query", "key": "m", "value": "uld" }], "destination": "/modules/uld", "permanent": true },
+    { "source": "/module.html", "has": [{ "type": "query", "key": "m", "value": "revenue" }], "destination": "/modules/revenue-accounting", "permanent": true },
+    { "source": "/module.html", "has": [{ "type": "query", "key": "m", "value": "compliance" }], "destination": "/modules/compliance-security", "permanent": true },
+    { "source": "/module.html", "has": [{ "type": "query", "key": "m", "value": "collaboration" }], "destination": "/modules/stakeholder-collaboration", "permanent": true },
+    { "source": "/module.html", "has": [{ "type": "query", "key": "m", "value": "platform" }], "destination": "/platform", "permanent": true },
+    { "source": "/module.html", "has": [{ "type": "query", "key": "m", "value": "inquiry" }], "destination": "/modules/commercial", "permanent": true },
+    { "source": "/module.html", "has": [{ "type": "query", "key": "m", "value": "rates" }], "destination": "/modules/commercial", "permanent": true },
+    { "source": "/module.html", "has": [{ "type": "query", "key": "m", "value": "acceptance" }], "destination": "/modules/terminal-operations", "permanent": true },
+    { "source": "/module.html", "has": [{ "type": "query", "key": "m", "value": "manifest" }], "destination": "/modules/terminal-operations", "permanent": true },
+    { "source": "/module.html", "has": [{ "type": "query", "key": "m", "value": "operations" }], "destination": "/modules/terminal-operations", "permanent": true },
+    { "source": "/module.html", "has": [{ "type": "query", "key": "m", "value": "tracking" }], "destination": "/modules/shipment-awb", "permanent": true },
+    { "source": "/module.html", "has": [{ "type": "query", "key": "m", "value": "shipment" }], "destination": "/modules/shipment-awb", "permanent": true },
+    { "source": "/module.html", "has": [{ "type": "query", "key": "m", "value": "cargoimp" }], "destination": "/platform", "permanent": true },
+    { "source": "/module.html", "has": [{ "type": "query", "key": "m", "value": "broadcasting" }], "destination": "/platform", "permanent": true },
+    { "source": "/module.html", "destination": "/", "permanent": true }
   ]
 }

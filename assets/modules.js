@@ -9,6 +9,8 @@
       pillar: "Commercial Pillar",
       eyebrow: "Commercial Management",
       lead: "Serves as the commercial foundation of the airline cargo business by enabling airlines to manage customers, products, inquiries, contracts and pricing strategies through a centralized platform.",
+      metaTitle: "Air Cargo Rate & Contract Management",
+      metaDescription: "Manage airline cargo customers, contracts, rates and quotations on a single platform, with spot pricing, credit control and customer performance analytics.",
       overview: "Commercial Management serves as the commercial foundation of the airline cargo business by enabling airlines to manage customers, products, inquiries, contracts and pricing strategies through a centralized platform. The module standardizes commercial activities across all sales channels while ensuring freight forwarders, GSAs and strategic customers operate using consistent commercial rules. Commercial teams can rapidly respond to market opportunities, generate quotations and maximize cargo revenue while maintaining complete visibility into customer relationships and pricing structures.",
       benefits: [
         "Improved customer engagement",
@@ -35,6 +37,8 @@
       pillar: "Commercial Pillar",
       eyebrow: "Capacity & Network Management",
       lead: "Enables airlines to maximize aircraft utilization while balancing demand, capacity and profitability across the airline network.",
+      metaTitle: "Air Cargo Capacity Management Software",
+      metaDescription: "Allocate and forecast air cargo capacity across routes, flights and partners, with block space agreements, overbooking rules and route profitability analysis.",
       overview: "Capacity & Network Management enables airlines to maximize aircraft utilization while balancing demand, capacity and profitability across the airline network. The module provides visibility into available cargo space and allows airlines to strategically allocate capacity across customers, routes and partners.",
       benefits: [
         "Increased load factors",
@@ -59,6 +63,8 @@
       pillar: "Commercial Pillar",
       eyebrow: "Booking Management",
       lead: "Digitizes and automates the complete booking lifecycle from initial request through confirmation and execution.",
+      metaTitle: "Air Cargo Booking Software",
+      metaDescription: "Digitize the air cargo booking lifecycle from request to confirmation, with automated validation, approvals, prioritization, amendments and waitlist management.",
       overview: "Booking Management digitizes and automates the complete booking lifecycle from initial request through confirmation and execution. The module supports multiple booking channels and configurable business rules to validate capacity, prioritize customers and streamline approvals.",
       benefits: [
         "Faster booking cycles",
@@ -83,6 +89,8 @@
       pillar: "Operational Pillar",
       eyebrow: "Shipment & Air Waybill Management",
       lead: "Provides complete control over the shipment documentation lifecycle while establishing a single source of truth for every cargo movement across the airline network.",
+      metaTitle: "e-AWB & Air Waybill Management Software",
+      metaDescription: "Control the air waybill lifecycle end to end: AWB stock and issuance, e-AWB, consolidations, split shipments, milestone tracking and documentation audit checks.",
       overview: "Shipment & Air Waybill Management provides complete control over the shipment documentation lifecycle while establishing a single source of truth for every cargo movement across the airline network.",
       benefits: [
         "Improved shipment visibility",
@@ -107,6 +115,8 @@
       pillar: "Operational Pillar",
       eyebrow: "Terminal & Cargo Operations",
       lead: "Manages the physical movement of cargo throughout airport and terminal operations from acceptance through aircraft departure and arrival processing.",
+      metaTitle: "Air Cargo Terminal Operations Software",
+      metaDescription: "Run terminal cargo operations from acceptance and warehouse tasks through build-up, manifest and flight closure, plus offload and irregularity management.",
       overview: "Terminal & Cargo Operations manages the physical movement of cargo throughout airport and terminal operations from acceptance through aircraft departure and arrival processing.",
       benefits: [
         "Faster cargo turnaround",
@@ -132,6 +142,8 @@
       pillar: "Operational Pillar",
       eyebrow: "ULD Management",
       lead: "Provides complete lifecycle visibility and control over Unit Load Devices throughout the airline cargo network.",
+      metaTitle: "Airline ULD Management Software",
+      metaDescription: "Track Unit Load Devices (ULDs) across the airline network with live inventory, allocation, rotation planning, maintenance scheduling and damage records.",
       overview: "ULD Management provides complete lifecycle visibility and control over Unit Load Devices throughout the airline cargo network.",
       benefits: [
         "Increased asset utilization",
@@ -154,6 +166,8 @@
       pillar: "Financial & Governance Pillar",
       eyebrow: "Revenue Accounting",
       lead: "Automates cargo billing, interline settlements and revenue assurance activities while ensuring financial accuracy across the cargo business.",
+      metaTitle: "Air Cargo Revenue Accounting Software",
+      metaDescription: "Automate air cargo billing, interline settlement and proration, with revenue assurance, leakage detection and audit controls that protect financial accuracy.",
       overview: "Revenue Accounting automates cargo billing, interline settlements and revenue assurance activities while ensuring financial accuracy across the cargo business.",
       benefits: [
         "Improved billing accuracy",
@@ -180,6 +194,8 @@
       pillar: "Financial & Governance Pillar",
       eyebrow: "Compliance & Security",
       lead: "Ensures airlines comply with customs, security and industry regulations imposed by local and international authorities.",
+      metaTitle: "Air Cargo Customs & Security Software",
+      metaDescription: "Meet customs, security and dangerous goods obligations with digital customs integration, screening status, embargo controls, reporting and full audit trails.",
       overview: "Compliance & Security ensures airlines comply with customs, security and industry regulations imposed by local and international authorities.",
       benefits: [
         "Reduced compliance risks",
@@ -201,6 +217,8 @@
       pillar: "Financial & Governance Pillar",
       eyebrow: "Stakeholder Collaboration",
       lead: "Enables airlines to digitally collaborate with freight forwarders, GSAs, ground handlers, airports, customs authorities and interline partners.",
+      metaTitle: "Cargo Partner Collaboration Software",
+      metaDescription: "Collaborate digitally with freight forwarders, GSAs, ground handlers and interline partners through shared milestones, documents and controlled data sharing.",
       overview: "Stakeholder Collaboration enables airlines to digitally collaborate with freight forwarders, GSAs, ground handlers, airports, customs authorities and interline partners.",
       benefits: [
         "Improved collaboration",
@@ -222,17 +240,19 @@
       pillar: "Platform Foundation",
       eyebrow: "Powered by EMC Digital Platform",
       lead: "A configurable digital foundation that enables EMC Airline Cargo Suite to adapt faster, integrate cleanly and support smarter decision-making across the cargo ecosystem.",
+      metaTitle: "Low-Code Air Cargo Platform & APIs",
+      metaDescription: "Configure the EMC Airline Cargo Suite without code: dynamic forms, workflow and rules engines, API gateway, Cargo-IMP, Cargo-XML and IATA ONE Record support.",
       overview: "A configurable digital foundation that enables EMC Airline Cargo Suite to adapt faster, integrate cleanly and support smarter decision-making across the cargo ecosystem.",
       benefits: [
         "Configure screens, workflows & rules without software development",
-        "Seamless connectivity via API Gateway, Cargo IMP, Cargo XML & OneRecord",
+        "Seamless connectivity via API Gateway, Cargo-IMP, Cargo-XML & ONE Record",
         "Enterprise organization, stakeholder & access management",
         "Intelligence platform with analytics, reporting & AI services"
       ],
       capabilities: [
         { name: "Low-Code Platform", desc: "Dynamic Form Designer, Dynamic Workflow Engine, and Dynamic Rules Engine for rapid adaptation." },
         { name: "Enterprise Platform", desc: "Organization Management, Stakeholder Management, and Identity & Access Management." },
-        { name: "Connectivity Platform", desc: "API Gateway, Cargo IMP, Cargo XML, and OneRecord integration." },
+        { name: "Connectivity Platform", desc: "API Gateway, Cargo-IMP, Cargo-XML, and ONE Record integration." },
         { name: "Intelligence Platform", desc: "Analytics, Reporting, and AI Services for data-driven decisions." }
       ]
     }

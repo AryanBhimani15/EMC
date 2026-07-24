@@ -16,11 +16,10 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content="https://easemycargo.com/assets/og.jpg" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/site.css?v=10">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"EMC Airline Cargo Suite","applicationCategory":"BusinessApplication","operatingSystem":"Cloud","description":"A configurable, cloud-native airline cargo management platform that digitizes commercial, operational, financial and compliance processes across the entire air cargo ecosystem.","url":"https://easemycargo.com/","publisher":{"@type":"Organization","name":"EMC | Ease My Cargo","url":"https://easemycargo.com/"}}</script>
+  <link rel="preload" href="/assets/fonts/archivo-var-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/plexsans-var-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/site.css?v=11">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://easemycargo.com/company#organization","name":"EMC | Ease My Cargo","alternateName":"Ease My Cargo","url":"https://easemycargo.com","logo":"https://easemycargo.com/favicon.svg"},{"@type":"SoftwareApplication","name":"EMC Airline Cargo Suite","applicationCategory":"BusinessApplication","operatingSystem":"Cloud","description":"A configurable, cloud-native airline cargo management platform that digitizes commercial, operational, financial and compliance processes across the entire air cargo ecosystem.","url":"https://easemycargo.com/","publisher":{"@id":"https://easemycargo.com/company#organization"}}]}</script>
 </head>
 <body>
 
@@ -40,19 +39,19 @@
         <div class="dropdown mega" id="dd-products">
           <div class="mega-grid">
             <div class="mega-col">
-              <h6>Commercial Pillar</h6>
+              <a class="mega-head" href="/pillars/commercial">Commercial Pillar</a>
               <a class="mega-link" href="/modules/commercial">Commercial Management</a>
               <a class="mega-link" href="/modules/capacity-network">Capacity &amp; Network</a>
               <a class="mega-link" href="/modules/booking">Booking Management</a>
             </div>
             <div class="mega-col">
-              <h6>Operational Pillar</h6>
+              <a class="mega-head" href="/pillars/operational">Operational Pillar</a>
               <a class="mega-link" href="/modules/shipment-awb">Shipment &amp; AWB</a>
               <a class="mega-link" href="/modules/terminal-operations">Terminal &amp; Cargo Ops</a>
               <a class="mega-link" href="/modules/uld">ULD Management</a>
             </div>
             <div class="mega-col">
-              <h6>Financial Pillar</h6>
+              <a class="mega-head" href="/pillars/financial">Financial Pillar</a>
               <a class="mega-link" href="/modules/revenue-accounting">Revenue Accounting</a>
               <a class="mega-link" href="/modules/compliance-security">Compliance &amp; Security</a>
               <a class="mega-link" href="/modules/stakeholder-collaboration">Stakeholder Collaboration</a>
@@ -76,7 +75,7 @@
           </a>
           <a class="dd-link" href="/#integrations">
             <span class="dd-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2l3 6 6 .9-4.5 4.3 1 6.3L12 17l-5.5 2.5 1-6.3L3 8.9 9 8z"/></svg></span>
-            <span><span class="dd-title">Connectivity &amp; Standards</span><span class="dd-desc">OneRecord, Cargo XML, Cargo IMP &amp; APIs</span></span>
+            <span><span class="dd-title">Connectivity &amp; Standards</span><span class="dd-desc">ONE Record, Cargo-XML, Cargo-IMP &amp; APIs</span></span>
           </a>
         </div>
       </div>
@@ -102,14 +101,17 @@
 <!-- mobile menu -->
 <div class="mobile-menu" id="mobileMenu">
   <div class="mm-group">Commercial Pillar</div>
+  <a href="/pillars/commercial">Commercial Pillar overview</a>
   <a href="/modules/commercial">Commercial Management</a>
   <a href="/modules/capacity-network">Capacity &amp; Network Management</a>
   <a href="/modules/booking">Booking Management</a>
   <div class="mm-group">Operational Pillar</div>
+  <a href="/pillars/operational">Operational Pillar overview</a>
   <a href="/modules/shipment-awb">Shipment &amp; Air Waybill Management</a>
   <a href="/modules/terminal-operations">Terminal &amp; Cargo Operations</a>
   <a href="/modules/uld">ULD Management</a>
   <div class="mm-group">Financial &amp; Governance Pillar</div>
+  <a href="/pillars/financial">Financial Pillar overview</a>
   <a href="/modules/revenue-accounting">Revenue Accounting</a>
   <a href="/modules/compliance-security">Compliance &amp; Security</a>
   <a href="/modules/stakeholder-collaboration">Stakeholder Collaboration</a>
@@ -140,11 +142,6 @@
       <button class="btn btn-primary btn-lg" data-demo>Request demo <svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
       <a class="btn btn-ghost btn-lg" href="#lifecycle">Explore cargo lifecycle</a>
     </div>
-    <div class="hero-trust reveal">
-      <span><span class="dot"></span> Configurable without code</span>
-      <span>Cloud-native platform</span>
-      <span>Single integrated ecosystem</span>
-    </div>
   </div>
 </section>
 
@@ -163,33 +160,37 @@
   </div>
 </section>
 
-<!-- ============================= PLATFORM OVERVIEW ============================= -->
+<!-- ============================= PLATFORM OVERVIEW (split) ============================= -->
 <section class="section" id="overview">
   <div class="container">
-    <div class="center reveal">
-      <span class="eyebrow no-line" style="justify-content:center">Platform Overview</span>
-      <h2 class="section-title">Single, Configurable Cargo Ecosystem</h2>
-      <p class="section-lead">EMC Airline Cargo Suite digitizes and orchestrates the entire air cargo lifecycle from commercial engagement through operational execution, regulatory compliance and financial settlement.</p>
-    </div>
-    <div class="grid cols-3 reveal" style="margin-top:44px">
-      <div class="panel">
-        <div class="p-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 3v18h18"/><path d="M7 15l3-4 3 2 5-7"/></svg></div>
-        <h3>End-to-End Orchestration</h3><p>Manage customers, pricing, bookings, shipments, operations and revenue accounting through a single integrated ecosystem.</p>
+    <div class="split reveal">
+      <div class="split-copy">
+        <span class="eyebrow no-line">Platform Overview</span>
+        <h2 class="section-title">Single, Configurable Cargo Ecosystem</h2>
+        <p class="section-lead">EMC Airline Cargo Suite digitizes and orchestrates the entire air cargo lifecycle from commercial engagement through operational execution, regulatory compliance and financial settlement.</p>
+        <ul class="feature-list" style="margin-top:26px">
+          <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span><span><strong class="fl-t">End-to-End Orchestration</strong><br>Manage customers, pricing, bookings, shipments, operations and revenue accounting through a single integrated ecosystem.</span></li>
+          <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span><span><strong class="fl-t">Low-Code Configuration</strong><br>Powered by EMC Digital Platform, allowing organizations to configure screens, workflows and business rules without extensive software development.</span></li>
+          <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></span><span><strong class="fl-t">Ecosystem Control</strong><br>A single, configurable cargo ecosystem designed for airline-scale commercial and operational control.</span></li>
+        </ul>
       </div>
-      <div class="panel">
-        <div class="p-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h4"/></svg></div>
-        <h3>Low-Code Configuration</h3><p>Powered by EMC Digital Platform, allowing organizations to configure screens, workflows and business rules without extensive software development.</p>
-      </div>
-      <div class="panel">
-        <div class="p-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2l3 6 6 .9-4.5 4.3 1 6.3L12 17l-5.5 2.5 1-6.3L3 8.9 9 8z"/></svg></div>
-        <h3>Ecosystem Control</h3><p>A single, configurable cargo ecosystem designed for airline-scale commercial and operational control.</p>
+      <div class="mock" role="img" aria-label="Platform coverage across the four process domains, on a cloud-native low-code foundation">
+        <div class="mock-head"><span class="mock-dot"></span><span class="mock-title">Platform Coverage</span></div>
+        <div class="mock-body">
+          <div class="mrow"><span class="lbl">Commercial</span><span class="badge ok">Integrated</span></div>
+          <div class="mrow"><span class="lbl">Operational</span><span class="badge ok">Integrated</span></div>
+          <div class="mrow"><span class="lbl">Financial</span><span class="badge ok">Integrated</span></div>
+          <div class="mrow"><span class="lbl">Compliance</span><span class="badge ok">Integrated</span></div>
+          <div class="mrow"><span class="lbl">Architecture</span><span class="val">Cloud-Native · Low-Code</span></div>
+          <div class="mrow"><span class="lbl">Foundation</span><span class="val">EMC Digital Platform</span></div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ============================= OUTCOMES ============================= -->
-<section class="section-sm" id="outcomes">
+<section class="section-sm band" id="outcomes">
   <div class="container">
     <div class="center reveal">
       <span class="eyebrow no-line" style="justify-content:center">Business Outcomes</span>
@@ -247,13 +248,14 @@
 </section>
 
 <!-- ============================= COMMERCIAL PILLAR ============================= -->
-<section class="section" id="commercial">
+<section class="section band" id="commercial">
   <div class="container">
-    <div class="center reveal">
-      <span class="eyebrow no-line" style="justify-content:center">Commercial Pillar</span>
-      <h2 class="section-title">Commercial Management &amp; Revenue Control</h2>
-      <p class="section-lead">Capabilities that help airlines manage customer demand, price intelligently, allocate capacity strategically and streamline booking responsiveness.</p>
-    </div>
+    <a class="pillar-open-link reveal" href="/pillars/commercial">
+      <span class="pillar-kicker">Commercial Pillar</span>
+      <h2 class="pillar-open-title">Commercial Management &amp; Revenue Control</h2>
+      <p class="pillar-open-lead">Capabilities that help airlines manage customer demand, price intelligently, allocate capacity strategically and streamline booking responsiveness.</p>
+      <span class="pillar-open-cta">Explore the Commercial pillar <svg class="arrow" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a>
     <div class="grid cols-3 reveal" style="margin-top:40px">
       <a class="mcard" href="/modules/commercial">
         <div class="mc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg></div>
@@ -283,10 +285,25 @@
 <!-- ============================= OPERATIONAL PILLAR ============================= -->
 <section class="section" id="operations">
   <div class="container">
-    <div class="center reveal">
-      <span class="eyebrow no-line" style="justify-content:center">Operational Pillar</span>
-      <h2 class="section-title">Execution Visibility &amp; Network Operations</h2>
-      <p class="section-lead">Capabilities that establish execution visibility across shipment control, terminal processes and ULD lifecycle management.</p>
+    <div class="split reveal" style="margin-bottom:44px">
+      <div class="split-copy">
+        <a class="pillar-open-link" href="/pillars/operational">
+          <span class="pillar-kicker">Operational Pillar</span>
+          <h2 class="pillar-open-title">Execution Visibility &amp; Network Operations</h2>
+          <p class="pillar-open-lead">Capabilities that establish execution visibility across shipment control, terminal processes and ULD lifecycle management.</p>
+          <span class="pillar-open-cta">Explore the Operational pillar <svg class="arrow" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+      </div>
+      <div class="mock" role="img" aria-label="Operational pillar covers three modules focused on execution visibility">
+        <div class="mock-head"><span class="mock-dot"></span><span class="mock-title">Operational Coverage</span></div>
+        <div class="mock-body">
+          <div class="mrow"><span class="lbl">Shipment &amp; AWB</span><span class="badge ok">Module</span></div>
+          <div class="mrow"><span class="lbl">Terminal &amp; Cargo Ops</span><span class="badge ok">Module</span></div>
+          <div class="mrow"><span class="lbl">ULD Management</span><span class="badge ok">Module</span></div>
+          <div class="mrow"><span class="lbl">Focus</span><span class="val">Execution visibility</span></div>
+          <div class="mrow"><span class="lbl">Foundation</span><span class="val">EMC Digital Platform</span></div>
+        </div>
+      </div>
     </div>
     <div class="grid cols-3 reveal" style="margin-top:40px">
       <a class="mcard" href="/modules/shipment-awb">
@@ -315,13 +332,14 @@
 </section>
 
 <!-- ============================= FINANCIAL PILLAR ============================= -->
-<section class="section" id="financial">
+<section class="section band" id="financial">
   <div class="container">
-    <div class="center reveal">
-      <span class="eyebrow no-line" style="justify-content:center">Financial &amp; Governance Pillar</span>
-      <h2 class="section-title">Revenue Integrity &amp; Ecosystem Compliance</h2>
-      <p class="section-lead">Capabilities that reinforce revenue integrity, compliance assurance and partner collaboration across the cargo ecosystem.</p>
-    </div>
+    <a class="pillar-open-link reveal" href="/pillars/financial">
+      <span class="pillar-kicker">Financial &amp; Governance Pillar</span>
+      <h2 class="pillar-open-title">Revenue Integrity &amp; Ecosystem Compliance</h2>
+      <p class="pillar-open-lead">Capabilities that reinforce revenue integrity, compliance assurance and partner collaboration across the cargo ecosystem.</p>
+      <span class="pillar-open-cta">Explore the Financial pillar <svg class="arrow" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a>
     <div class="grid cols-3 reveal" style="margin-top:40px">
       <a class="mcard" href="/modules/revenue-accounting">
         <div class="mc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 3v18h18"/><path d="M7 15l3-4 3 2 5-7"/></svg></div>
@@ -373,7 +391,7 @@
         <div class="mc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 7h16M4 12h16M4 17h16"/><circle cx="8" cy="7" r="1.4" fill="currentColor"/></svg></div>
         <h4>Connectivity Platform</h4>
         <p>Seamless data exchange and messaging.</p>
-        <ul class="mc-caps"><li>API Gateway</li><li>Cargo IMP</li><li>Cargo XML &amp; OneRecord</li></ul>
+        <ul class="mc-caps"><li>API Gateway</li><li>Cargo-IMP</li><li>Cargo-XML &amp; ONE Record</li></ul>
       </div>
       <div class="mcard">
         <div class="mc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 3v18h18"/><path d="M7 15l3-4 3 2 5-7"/></svg></div>
@@ -389,18 +407,20 @@
 </section>
 
 <!-- ============================= INTEGRATIONS ============================= -->
-<section class="section" id="integrations">
+<section class="section band" id="integrations">
   <div class="container">
-    <div class="center reveal">
-      <span class="eyebrow no-line" style="justify-content:center">Integrations &amp; Standards</span>
-      <h2 class="section-title">Ecosystem Connectivity</h2>
-      <p class="section-lead">Native standards support built into the EMC Digital Platform.</p>
-    </div>
-    <div class="std-grid reveal">
-      <div class="std"><div class="std-name">OneRecord</div><div class="std-kind">Modern Data Standard</div></div>
-      <div class="std"><div class="std-name">Cargo XML</div><div class="std-kind">Digital Data Interchange</div></div>
-      <div class="std"><div class="std-name">Cargo IMP</div><div class="std-kind">Legacy Messaging Standard</div></div>
-      <div class="std"><div class="std-name">API Gateway</div><div class="std-kind">Real-time Integration &amp; Webhooks</div></div>
+    <div class="split reveal">
+      <div class="split-copy">
+        <span class="eyebrow no-line">Integrations &amp; Standards</span>
+        <h2 class="section-title">Ecosystem Connectivity</h2>
+        <p class="section-lead">Native standards support built into the EMC Digital Platform.</p>
+      </div>
+      <div class="std-grid" style="grid-template-columns:repeat(2,1fr);margin-top:0">
+        <div class="std"><div class="std-name">ONE Record</div><div class="std-kind">Modern Data Standard</div></div>
+        <div class="std"><div class="std-name">Cargo-XML</div><div class="std-kind">Digital Data Interchange</div></div>
+        <div class="std"><div class="std-name">Cargo-IMP</div><div class="std-kind">Legacy Messaging Standard</div></div>
+        <div class="std"><div class="std-name">API Gateway</div><div class="std-kind">Real-time Integration &amp; Webhooks</div></div>
+      </div>
     </div>
   </div>
 </section>
@@ -471,10 +491,11 @@
       <span>© 2026 EMC Aviation Commerce Platform. All rights reserved.</span>
       <span class="fb-links"><a href="/legal/privacy">Privacy Policy</a><a href="/legal/terms">Terms of Service</a></span>
     </div>
+    <p class="footer-credit">Hero photograph: <a href="https://commons.wikimedia.org/wiki/File:Aircraft_container_and_pallet_loader.JPG">“Aircraft container and pallet loader”</a> by Jamesshliu, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.</p>
   </div>
 </footer>
 
-<script src="/assets/site.js?v=10"></script>
-<script defer src="/assets/demo-modal.js?v=10"></script>
+<script src="/assets/site.js?v=11"></script>
+<script defer src="/assets/demo-modal.js?v=11"></script>
 </body>
 </html>
